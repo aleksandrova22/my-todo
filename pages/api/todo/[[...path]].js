@@ -17,9 +17,9 @@ export default async function todo(request, response) {
     id = path?.[0];
   console.log('parsing', request.method, { path, id });
 
-  response.setHeader('Access-Control-Allow-Origin', '*');
-  response.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH, OPTIONS');
-  response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  // response.setHeader('Access-Control-Allow-Origin', '*');
+  // response.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH, OPTIONS');
+  // response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   switch (method) {
     case 'OPTIONS':
@@ -31,36 +31,32 @@ export default async function todo(request, response) {
       response.status(200).json(rowsGet);
       break;
     case 'POST':
-      const
-        { id, text } = JSON.parse(await postData(request));
-      addSt(id, text);
-      response.statusCode = 201;
-      break;
+     // const         text  = JSON.parse(await postData(request));
+      const   addSt = await sql`INSERT INTO list (id, text, checked) VALUES(${Math.random()}, ${request.body.text},'false')`;
+      response.status(201).send();
+      //console.log('my text', request.data.text);
+      return;
     case 'DELETE':
       const
-        result = await sql`DELETE from list WHERE id = ${{id}}`;
+        result = await sql`DELETE from list WHERE id = ${id}`;
       console.log('result=', result);
       response.status(200).send();
       return;
 
     //break;
     case 'PATCH':
+      response.setHeader('content-type', 'application/json; charset=utf-8');
       const
-        data = JSON.parse(await postData(request));
-      updateSt.run(data.text, data.id);
-      response.statusCode = 200;
-      break;
+      //data = JSON.parse(await postData(request)),
+      result1 = await sql`UPDATE list set text = '${request.body.text}', checked = 'true' where id=${request.body.id}`;
+      response.status(200).send();
+   return;
+     // break;
 
   }
 
-
-
-
-
   //response.status(200).json( rows );
 }
-
-
 
 
 async function postData(request) {
