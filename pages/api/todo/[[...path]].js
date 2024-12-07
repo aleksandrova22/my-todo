@@ -3,7 +3,6 @@ import { parse } from 'node:path';
 import { URL } from 'node:url';
 const sql = neon(process.env.POSTGRES_URL);
 
-
 export default async function todo(request, response) {
   const
     { query, method } = request,
@@ -11,9 +10,9 @@ export default async function todo(request, response) {
     id = path?.[0];
   console.log('parsing', request.method, { path, id });
 
-  // response.setHeader('Access-Control-Allow-Origin', '*');
-  // response.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH, OPTIONS');
-  // response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  response.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PATCH, OPTIONS');
+  response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   switch (method) {
     case 'OPTIONS':
@@ -28,7 +27,7 @@ export default async function todo(request, response) {
      // const         text  = JSON.parse(await postData(request));
       const   addSt = await sql`INSERT INTO list (id, text, checked) VALUES(${Math.random()}, ${request.body.text},'false')`;
       response.status(201).send();
-      //console.log('my text', request.data.text);
+     
       return;
     case 'DELETE':
       const
