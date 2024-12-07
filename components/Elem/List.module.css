@@ -1,0 +1,22 @@
+.list {
+margin: 10px;
+
+& button {
+  
+    border: 1px solid gray;
+    border-radius: 5px;
+    font-size: small;
+    font-weight: bold;
+    color: white;
+    background-color: green;
+    margin: 10px;
+}
+
+
+& ol {
+  border: 1px solid gray;
+  font-size: large;
+  margin: 5px;
+}
+
+}

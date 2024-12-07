@@ -6,12 +6,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "jss": "npx json-server -p 3333 -s ./static db.json",
+    "serv": "node --experimental-sqlite --watch serv.mjs"
   },
   "dependencies": {
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106",
-    "next": "15.0.3"
+    "@neondatabase/serverless": "^0.10.4",
+    "@vercel/postgres": "^0.10.0",
+    "json-server": "^1.0.0-beta.3",
+    "next": "15.0.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hot-toast": "^2.4.1",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "eslint": "^8",
