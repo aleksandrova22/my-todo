@@ -3,12 +3,6 @@ import { parse } from 'node:path';
 import { URL } from 'node:url';
 const sql = neon(process.env.POSTGRES_URL);
 
-// const
-//   selectAllSt = () => sql`SELECT * FROM list`,
-//   addSt = ()=> sql`INSERT INTO list (id, text, checked) VALUES ('${id}','${text}','true')`,
-//   //deleteSt = (id) => sql`DELETE from list where id=${id}`,
-//   updateSt = sql`UPDATE list set text = ?, checked = 'true' where id=?`;
-
 
 export default async function todo(request, response) {
   const
