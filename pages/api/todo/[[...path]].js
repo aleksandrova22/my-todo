@@ -18,12 +18,12 @@ export default async function todo(request, response) {
   switch (method) {
     case 'OPTIONS':
       response.writeHead(204);
-      break;
+     return;
     case 'GET':
       response.setHeader('content-type', 'application/json; charset=utf-8');
       const rowsGet = await sql`SELECT * FROM list`;
       response.status(200).json(rowsGet);
-      break;
+      return;
     case 'POST':
      // const         text  = JSON.parse(await postData(request));
       const   addSt = await sql`INSERT INTO list (id, text, checked) VALUES(${Math.random()}, ${request.body.text},'false')`;
@@ -36,7 +36,6 @@ export default async function todo(request, response) {
       console.log('result=', result);
       response.status(200).send();
       return;
-
     //break;
     case 'PATCH':
       response.setHeader('content-type', 'application/json; charset=utf-8');
@@ -44,14 +43,12 @@ export default async function todo(request, response) {
       //data = JSON.parse(await postData(request)),
       result1 = await sql`UPDATE list set text = '${request.body.text}', checked = 'true' where id=${request.body.id}`;
       response.status(200).send();
-   return;
-     // break;
+      return;
+     //break;
 
   }
-
   //response.status(200).json( rows );
 }
-
 
 async function postData(request) {
   const buffers = [];
