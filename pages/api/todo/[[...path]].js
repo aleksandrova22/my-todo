@@ -5,7 +5,7 @@ import { URL } from 'node:url';
 
 
 const sql = neon(process.env.POSTGRES_URL);
-
+console.log('sql=',sql);
 export default async function todo(request, response) {
   const
     { query, method } = request,
