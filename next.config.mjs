@@ -3,7 +3,8 @@
 //   reactStrictMode: true,
 // };
 
- 
+
+
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
