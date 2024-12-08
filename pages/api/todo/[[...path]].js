@@ -3,6 +3,7 @@ import { parse } from 'node:path';
 import { URL } from 'node:url';
 
 
+
 const sql = neon(process.env.POSTGRES_URL);
 
 export default async function todo(request, response) {
@@ -19,17 +20,18 @@ export default async function todo(request, response) {
   switch (method) {
     case 'OPTIONS':
       response.writeHead(204);
-     return;
+      return;
     case 'GET':
       response.setHeader('content-type', 'application/json; charset=utf-8');
       const rowsGet = await sql`SELECT * FROM list`;
       response.status(200).json(rowsGet);
       return;
     case 'POST':
-     // const         text  = JSON.parse(await postData(request));
-      const   addSt = await sql`INSERT INTO list (id, text, checked) VALUES(${Math.random()}, ${request.body.text},'false')`;
+      const idGen = Math.floor(Math.random() * 100) + 1;
+      const addSt = await sql`INSERT INTO list (id, text, checked) VALUES(${idGen}, ${request.body.text},'false')`;
+      console.log('addSt=', addSt);
       response.status(201).send();
-     
+
       return;
     case 'DELETE':
       const
@@ -39,14 +41,12 @@ export default async function todo(request, response) {
       return;
     //break;
     case 'PATCH':
-      response.setHeader('content-type', 'application/json; charset=utf-8');
       const
-      //data = JSON.parse(await postData(request)),
-      result1 = await sql`UPDATE list set text = '${request.body.text}', checked = 'true' where id=${request.body.id}`;
+        setSt = await sql`UPDATE list set text = ${request.body.text}, checked = 'true' where id = ${id}`;
+      console.log('setSt=', setSt);
       response.status(200).send();
       return;
-     //break;
-
+    //break;
   }
   //response.status(200).json( rows );
 }
