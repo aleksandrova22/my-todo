@@ -3,17 +3,12 @@
 //   reactStrictMode: true,
 // };
 
-// export default nextConfig;
-
-
-
+ 
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
-  },
-  
-    distDir: 'build'
+  }
 }
- export default nextConfig
 
- 
+export default nextConfig;
+
