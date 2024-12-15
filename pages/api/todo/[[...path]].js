@@ -46,9 +46,7 @@ export default async function todo(request, response) {
       console.log('setSt=', setSt);
       response.status(200).send();
       return;
-    //break;
   }
-  //response.status(200).json( rows );
 }
 
 async function postData(request) {
