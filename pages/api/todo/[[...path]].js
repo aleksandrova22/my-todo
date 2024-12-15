@@ -1,3 +1,4 @@
+ "use server";
 import { neon } from '@neondatabase/serverless';
 import { parse } from 'node:path';
 import { URL } from 'node:url';
